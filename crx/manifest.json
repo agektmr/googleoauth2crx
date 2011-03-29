@@ -1,0 +1,30 @@
+{
+  "name": "Chrome WebApp Google OAuth2 Usage Example",
+  "description": "Example implementation of Google OAuth2 on Chrome Installable Web Apps",
+  "version": "1",
+  "app": {
+    "launch": {
+      "local_path": "index.html"
+    }
+  },
+  "icons": {
+    "16": "19.png",
+    "128": "128.png"
+  },
+  "permissions": [
+    "https://www.blogger.com/",
+    "https://www.google.com/",
+    "https://docs.google.com/",
+    "https://finance.google.com/",
+    "https://mail.google.com/",
+    "https://maps.google.com/",
+    "https://www-opensocial.googleusercontent.com/",
+    "https://orkut.gmodules.com/",
+    "https://picasaweb.google.com/",
+    "https://sites.google.com/",
+    "https://spreadsheets.google.com/",
+    "https://wave.googleusercontent.com/",
+    "https://gdata.youtube.com/",
+    "https://www.googleapis.com/"
+  ]
+}

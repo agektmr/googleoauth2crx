@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Google OAuth2 Authentication done!</title>
+    <style>
+      body {margin:0; padding:0;}
+      iframe {margin:0; padding:0; border:0;}
+    </style>
+    <script>
+      /**
+       * README: replace "ext_id" with your actual extension's id
+       */
+      var ext_id = 'idneeldnahcdjfnlanhkknhfmhibopbg';
+      var ext_url = 'chrome-extension://'+ext_id;
+      var query_parse = function(query) {
+        var obj = {};
+        query.split('&').forEach(function(val) {
+          var tmp = val.split('=');
+          if (tmp.length != 2) return;
+          obj[decodeURIComponent(tmp[0])] = decodeURIComponent(tmp[1]);
+        });
+        return obj;
+      };
+      window.onload = function() {
+        var iframe = document.createElement('iframe');
+        iframe.src = ext_url+'/receiver.html';
+        document.body.appendChild(iframe);
+        window.onmessage = function(e) {
+          if (e.origin.indexOf(ext_url) == -1) {
+            document.write('invalid request');
+            return;
+          }
+          switch (e.data) {
+          case 'redirect' :
+            location.href = ext_url+'/index.html';
+            break;
+          case 'request' :
+            if (document.URL.match(/#/)) {
+              var hash = document.URL.replace(/^.*?#(.*)/, "$1");
+              iframe.contentWindow.postMessage(JSON.stringify(query_parse(hash)), iframe.src); 
+            } else {
+              document.write('Google Authentication Failed');
+            }
+            break;
+          }
+        }
+      }
+    </script>
+  </head>
+  <body></body>
+</html>
